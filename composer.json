@@ -1,0 +1,32 @@
+{
+    "name": "smile/magento2-smilelab-quality-suite",
+    "type": "library",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Aurélien FOUCRET",
+            "email": "aurelien.foucret@smile.fr"
+        },
+        {
+            "name": "Romain Ruaud",
+            "email": "romain.ruaud@smile.fr"
+        }
+    ],
+    "description": "Complete suite of quality tools used by Smile Lab for community Magento2 projects.",
+    "homepage": "https://github.com/Smile-SA/magento2-smilelab-phpcs",
+    "keywords": [
+        "php",
+        "phpcs",
+        "coding standards",
+        "phpmd"
+    ],
+    "require": {
+        "phpunit/phpunit": "~4.0",
+        "phpmd/phpmd": "~2.0",
+        "pdepend/pdepend": "~2.1",
+        "fabpot/php-cs-fixer": "~1.2",
+        "squizlabs/php_codesniffer": "^2.6.1",
+        "smile/magento2-smilelab-phpmd": "1.0.0",
+        "smile/magento2-smilelab-phpcs": "1.0.0"
+    }
+}
