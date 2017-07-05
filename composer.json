@@ -24,6 +24,6 @@
         "phpunit/phpunit": "~4.0",
         "pdepend/pdepend": "~2.1",
         "smile/magento2-smilelab-phpmd": "1.0.1",
-        "smile/magento2-smilelab-phpcs": "1.0.2"
+        "smile/magento2-smilelab-phpcs": "1.0.3"
     }
 }
