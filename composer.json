@@ -21,7 +21,7 @@
         "phpmd"
     ],
     "require": {
-        "phpunit/phpunit": "~6.2",
+        "phpunit/phpunit": "^9",
         "pdepend/pdepend": "~2.1",
         "smile/magento2-smilelab-phpmd": "1.1.1",
         "smile/magento2-smilelab-phpcs": "~2.0.0"
