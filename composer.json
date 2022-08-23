@@ -10,20 +10,25 @@
         {
             "name": "Romain Ruaud",
             "email": "romain.ruaud@smile.fr"
+        },
+        {
+            "name": "Pierre Gauthier",
+            "email": "pierre.gauthier@smile.fr"
         }
     ],
     "description": "Complete suite of quality tools used by Smile Lab for community Magento2 projects.",
     "homepage": "https://github.com/Smile-SA/magento2-smilelab-phpcs",
     "keywords": [
         "php",
-        "phpcs",
         "coding standards",
+        "phpcs",
         "phpmd"
     ],
+    "minimum-stability": "dev",
     "require": {
-        "phpunit/phpunit": "^9",
-        "pdepend/pdepend": "~2.1",
-        "smile/magento2-smilelab-phpmd": "1.1.1",
-        "smile/magento2-smilelab-phpcs": "~2.0.0"
+        "php-parallel-lint/php-parallel-lint": "*",
+        "smile/magento2-smilelab-phpcs": "dev-master",
+        "smile/magento2-smilelab-phpmd": "dev-master",
+        "smile/magento2-smilelab-phpstan": "dev-master"
     }
 }
