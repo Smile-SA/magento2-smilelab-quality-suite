@@ -1,28 +1,13 @@
 {
     "name": "smile/magento2-smilelab-quality-suite",
+    "description": "Complete suite of quality tools for Magento projects.",
     "type": "library",
     "license": "OSL-3.0",
     "authors": [
         {
-            "name": "Aurélien FOUCRET",
-            "email": "aurelien.foucret@smile.fr"
-        },
-        {
-            "name": "Romain Ruaud",
-            "email": "romain.ruaud@smile.fr"
-        },
-        {
-            "name": "Pierre Gauthier",
-            "email": "pierre.gauthier@smile.fr"
+            "name": "Smile Community of Practice",
+            "homepage": "https://www.smile.eu"
         }
-    ],
-    "description": "Complete suite of quality tools used by Smile Lab for community Magento2 projects.",
-    "homepage": "https://github.com/Smile-SA/magento2-smilelab-phpcs",
-    "keywords": [
-        "php",
-        "coding standards",
-        "phpcs",
-        "phpmd"
     ],
     "minimum-stability": "dev",
     "require": {
