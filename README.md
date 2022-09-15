@@ -16,7 +16,7 @@ composer require --dev smile/magento2-smilelab-quality-suite
 
 ## Configuration
 
-Create three file at the root of you project directory:
+Create three files at the root of your project directory:
 
 - phpcs.xml.dist ([example](https://github.com/Smile-SA/magento2-module-debug-toolbar/blob/master/phpcs.xml.dist))
 - phpmd.xml.dist ([example](https://github.com/Smile-SA/magento2-module-debug-toolbar/blob/master/phpmd.xml.dist))
@@ -50,27 +50,6 @@ php vendor/bin/phpcbf -s --standard=SmileLab --extensions=php,phtml [src path]
 ```
 
 ## CI
-
-### GitLab Runner
-
-Example of `.gitlab-ci.yml` file:
-
-```yaml
-before_script:
-  - 'composer install'
-
-sniffers:
-    variables:
-        COMPOSER_AUTH: $COMPOSER_AUTH
-    script:
-        - 'composer audit --format=plain'
-        - 'vendor/bin/parallel-lint --exclude vendor [src path]'
-        - 'vendor/bin/phpcs --standard=SmileLab --extensions=php,phtml [src path]'
-        - 'vendor/bin/phpmd [src path] text phpmd.xml.dist'
-        - 'vendor/bin/phpstan analyse [src path]'
-    tags:
-        - 'php81'
-```
 
 ### GitHub Workflow
 
@@ -139,4 +118,25 @@ jobs:
 
             - name: 'Run PHPStan'
               run: 'vendor/bin/phpstan analyse [src path]' 
+```
+
+### GitLab Runner
+
+Example of `.gitlab-ci.yml` file:
+
+```yaml
+before_script:
+  - 'composer install'
+
+sniffers:
+    variables:
+        COMPOSER_AUTH: $COMPOSER_AUTH
+    script:
+        - 'composer audit --format=plain'
+        - 'vendor/bin/parallel-lint --exclude vendor [src path]'
+        - 'vendor/bin/phpcs --standard=SmileLab --extensions=php,phtml [src path]'
+        - 'vendor/bin/phpmd [src path] text phpmd.xml.dist'
+        - 'vendor/bin/phpstan analyse [src path]'
+    tags:
+        - 'php81'
 ```
