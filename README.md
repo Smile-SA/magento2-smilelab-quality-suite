@@ -22,7 +22,7 @@ Create three file at the root of you project directory:
 - phpmd.xml.dist ([example](https://github.com/Smile-SA/magento2-module-debug-toolbar/blob/master/phpmd.xml.dist))
 - phpstan.neon.dist ([example](https://github.com/Smile-SA/magento2-module-debug-toolbar/blob/master/phpstan.neon.dist))
 
-## Analyse Your Code
+## Usage
 
 ```shell
 # Check registered vulnerabilities
