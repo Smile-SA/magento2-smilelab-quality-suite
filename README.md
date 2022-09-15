@@ -1,100 +1,55 @@
-# Smile Lab Quality Suite tools
+# Smile Lab Quality Suite (Magento)
 
-This library contains tools used by Smile Lab for quality control on Magento2 community projects.
+This library provides coding standards / rulesets that can be used on Magento projects.
 
-## Install
+It includes the following packages:
 
-```bash
+- [Smile Lab PHPCS Coding Standard](https://github.com/Smile-SA/magento2-smilelab-phpcs)
+- [Smile Lab PHPMD Ruleset](https://github.com/Smile-SA/magento2-smilelab-phpmd)
+- [SmileLab PHPStan Extension](https://github.com/Smile-SA/magento2-smilelab-phpstan)
+
+## Installation
+
+```shell
 composer require --dev smile/magento2-smilelab-quality-suite
 ```
 
-Create three file at the root of you project directory : 
-- `phpcs.xml.dist`
-    ```xml
-    <?xml version="1.0"?>
-    <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+## Configuration
 
-        <arg name="basepath" value="."/>
-        <arg name="extensions" value="php,phtml"/>
-        <arg name="colors"/>
-  
-        <config name="php_version" value="[MIN_COMPATIBLE_PHP_VERSION]"/>
+Create three file at the root of you project directory:
 
-        <!-- Show progress of the run -->
-        <arg value="p"/>
+- phpcs.xml.dist ([example](https://github.com/Smile-SA/magento2-module-debug-toolbar/blob/master/phpcs.xml.dist))
+- phpmd.xml.dist ([example](https://github.com/Smile-SA/magento2-module-debug-toolbar/blob/master/phpmd.xml.dist))
+- phpstan.neon.dist ([example](https://github.com/Smile-SA/magento2-module-debug-toolbar/blob/master/phpstan.neon.dist))
 
-        <!-- Show sniff codes -->
-        <arg value="s"/>
+## Analyse Your Code
 
-        <rule ref="SmileLab"/>      
-
-        <exclude-pattern>vendor/*</exclude-pattern>
-    </ruleset>
-    ```
-    You must [specify the minimum php version](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Configuration-Options#setting-the-php-version) that your module require by setting the config php_version in your phpcs config file. For example, to set php 7.4 as the min version, specify the value `70400`.
-
-
-- `phpmd.xml.dist`
-    ```xml
-    <?xml version='1.0' encoding="UTF-8"?>
-    <ruleset xmlns="http://pmd.sf.net/ruleset/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd" xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
-
-        <rule ref="vendor/smile/magento2-smilelab-phpmd/ruleset.xml"/>
-
-        <exclude-pattern>vendor/*</exclude-pattern>
-    </ruleset>
-    ```
-  - `phpstan.neon.dist`
-      ```neon
-      parameters:
-          level: 6
-          phpVersion: [MIN_COMPATIBLE_PHP_VERSION]
-          checkMissingIterableValueType: false
-          excludePaths:
-              - 'vendor/*'
-      ```
-
-      If you also install phpstan/extension-installer then you're all set!
-
-      Otherwise, add the following configuration to this file:
-
-      ```neon
-      includes:
-          - vendor/smile/magento2-smilelab-phpstan/extension.neon
-      ```
-
-      You must [specify the minimum php version](https://phpstan.org/config-reference#miscellaneous-parameters) that your module require by setting the config php_version in your phpcs config file. For example, to set php 7.4 as the min version, specify the value `70400`.
-
-## Analyze your code
-
-```bash
+```shell
 # Check registered vulnerabilities
 composer audit
 
-# Analyze php syntax
+# Analyse php syntax
 php vendor/bin/parallel-lint --exclude vendor [src path]
 
-# Analyze code style
+# Analyse code style
 php vendor/bin/phpcs --standard=SmileLab [src path]
 
-# Analyze code complexity
+# Analyse code complexity
 php vendor/bin/phpmd [src path] text phpmd.xml.dist
 
-# Analyze code logic
+# Analyse code logic
 php vendor/bin/phpstan analyse [src path]
 ```
 
 ## Fix your code
 
-A lot of style errors can be fixed automatically, you can run this command to do it :
+A lot of style errors can be fixed automatically by running this command:
 
-```bash
+```shell
 php vendor/bin/phpcbf -s --standard=SmileLab --extensions=php,phtml [src path]
 ```
 
 ## CI
-
-You should consider validate the code of you project automatically, there some exemple of configuration file you can use on Gitlab or GitHub project.
 
 ### GitLab Runner
 
@@ -119,10 +74,10 @@ sniffers:
 
 ### GitHub Workflow
 
-Example of `.github/workflows/ci.yaml` file:
+Example of `.github/workflows/static-analysis.yaml` file:
 
 ```yaml
-name: 'CI'
+name: 'Static Code Analysis'
 
 on:
     pull_request: ~
