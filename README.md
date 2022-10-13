@@ -68,11 +68,6 @@ jobs:
     tests:
         runs-on: 'ubuntu-latest'
 
-        strategy:
-            matrix:
-                php-version:
-                    - '8.1'
-
         steps:
             - name: 'Checkout'
               uses: 'actions/checkout@v3'
@@ -80,26 +75,30 @@ jobs:
             - name: 'Install PHP'
               uses: 'shivammathur/setup-php@v2'
               with:
-                  php-version: '${{ matrix.php-version }}'
+                  php-version: '8.1'
                   coverage: 'none'
                   tools: 'composer:v2'
+              env:
+                  COMPOSER_AUTH_JSON: |
+                      {
+                          "http-basic": {
+                              "repo.magento.com": {
+                                  "username": "${{ secrets.MAGENTO_USERNAME }}",
+                                  "password": "${{ secrets.MAGENTO_PASSWORD }}"
+                              }
+                          }
+                      }
 
             - name: 'Get composer cache directory'
-              id: 'composercache'
-              run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
+              id: 'composer-cache'
+              run: 'echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT'
 
             - name: 'Cache dependencies'
               uses: 'actions/cache@v3'
               with:
-                  path: '${{ steps.composercache.outputs.dir }}'
-                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                  path: '${{ steps.composer-cache.outputs.dir }}'
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
                   restore-keys: '${{ runner.os }}-composer-'
-
-            - name: 'Prepare credentials'
-              env:
-                  MAGENTO_USERNAME: '${{ secrets.MAGENTO_USERNAME }}'
-                  MAGENTO_PASSWORD: '${{ secrets.MAGENTO_PASSWORD }}'
-              run: 'composer config -g http-basic.repo.magento.com "$MAGENTO_USERNAME" "$MAGENTO_PASSWORD"'
 
             - name: 'Install dependencies'
               run: 'composer install --prefer-dist'
