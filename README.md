@@ -29,16 +29,16 @@ Create three files at the root of your project directory:
 composer audit
 
 # Analyse php syntax
-php vendor/bin/parallel-lint --exclude vendor [src path]
+vendor/bin/parallel-lint --exclude vendor [src path]
 
 # Analyse code style
-php vendor/bin/phpcs --standard=SmileLab [src path]
+vendor/bin/phpcs
 
 # Analyse code complexity
-php vendor/bin/phpmd [src path] text phpmd.xml.dist
+vendor/bin/phpmd [src path] text phpmd.xml.dist
 
 # Analyse code logic
-php vendor/bin/phpstan analyse [src path]
+vendor/bin/phpstan analyse
 ```
 
 ## Fix your code
@@ -46,7 +46,7 @@ php vendor/bin/phpstan analyse [src path]
 A lot of style errors can be fixed automatically by running this command:
 
 ```shell
-php vendor/bin/phpcbf -s --standard=SmileLab --extensions=php,phtml [src path]
+vendor/bin/phpcbf --extensions=php,phtml
 ```
 
 ## CI
@@ -111,13 +111,13 @@ jobs:
               run: 'vendor/bin/parallel-lint --exclude vendor [src path]'
 
             - name: 'Run PHP CodeSniffer'
-              run: 'vendor/bin/phpcs --standard=SmileLab --extensions=php,phtml [src path]'
+              run: 'vendor/bin/phpcs --extensions=php,phtml'
 
             - name: 'Run PHPMD'
               run: 'vendor/bin/phpmd [src path] xml phpmd.xml.dist'
 
             - name: 'Run PHPStan'
-              run: 'vendor/bin/phpstan analyse [src path]' 
+              run: 'vendor/bin/phpstan analyse' 
 ```
 
 ### GitLab Runner
@@ -134,9 +134,9 @@ sniffers:
     script:
         - 'composer audit --format=plain'
         - 'vendor/bin/parallel-lint --exclude vendor [src path]'
-        - 'vendor/bin/phpcs --standard=SmileLab --extensions=php,phtml [src path]'
+        - 'vendor/bin/phpcs --extensions=php,phtml'
         - 'vendor/bin/phpmd [src path] text phpmd.xml.dist'
-        - 'vendor/bin/phpstan analyse [src path]'
+        - 'vendor/bin/phpstan analyse'
     tags:
         - 'php81'
 ```
