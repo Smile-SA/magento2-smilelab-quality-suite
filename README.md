@@ -56,7 +56,7 @@ vendor/bin/phpcbf --extensions=php,phtml
 Example of `.github/workflows/static-analysis.yaml` file:
 
 ```yaml
-name: 'Static Code Analysis'
+name: 'Static Analysis'
 
 on:
     pull_request: ~
