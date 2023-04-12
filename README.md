@@ -8,6 +8,15 @@ It includes the following packages:
 - [Smile Lab PHPMD Ruleset](https://github.com/Smile-SA/magento2-smilelab-phpmd)
 - [SmileLab PHPStan Extension](https://github.com/Smile-SA/magento2-smilelab-phpstan)
 
+## Table of content
+
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Fix your code](#fix-your-code)
+- [Ci](#ci)
+- [Baseline](#baseline)
+
 ## Installation
 
 ```shell
@@ -139,3 +148,26 @@ sniffers:
     tags:
         - 'php81'
 ```
+
+## Baseline
+
+If you want to add this coding standard on an existing project, it might be complicated to fix all issues. The baseline is a mechanism that allows you to keep your legacy code as it is and enforces the quality analysis for the code you will add in the future.  
+
+> :heavy_exclamation_mark: **It is always better to fix all issues. Baseline are a tweak to help you have a fresh start. But keep in mind that all errors (in the baseline or not) must be corrected eventually.**
+
+To generate the baselines, run these commands: 
+```shell
+# PHPCS
+composer require --dev digitalrevolution/php-codesniffer-baseline
+vendor/bin/phpcs --report=\\DR\\CodeSnifferBaseline\\Reports\\Baseline --report-file=phpcs.baseline.xml --extensions=php,phtml
+
+# PHPMD
+vendor/bin/phpmd app ansi phpmd.xml.dist --generate-baseline
+
+# PHPSTAN
+vendor/bin/phpstan analyse --generate-baseline
+```
+
+For phpstan, you'll need to add the file `phpstan-baseline.neon` to the `include` part of the `phpstan.neon.dist` file and config `reportUnmatchedIgnoredErrors: false` to the `parameters` part of the same file.
+
+The baseline files must be added to git.
