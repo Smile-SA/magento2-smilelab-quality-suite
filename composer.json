@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "php-parallel-lint/php-parallel-lint": "*",
-        "smile/magento2-smilelab-phpcs": "^3.0",
+        "smile/magento2-smilelab-phpcs": "^4.0",
         "smile/magento2-smilelab-phpmd": "^2.0",
         "smile/magento2-smilelab-phpstan": "^1.0"
     }
